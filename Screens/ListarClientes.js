@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import AntDesign from '@expo/vector-icons/AntDesign';
 import React, { use, useState } from "react";
 
 import { useNavigation } from "@react-navigation/native";
@@ -28,7 +29,7 @@ export default function ListarClientes() {
       <TouchableOpacity
         style={styles.navigateButton}
         onPress={() =>
-          navigation.navigate("Formulario", { clientes, setClientes })
+          navigation.navigate("Registrar Cliente", { clientes, setClientes })
         }
       >
         <Text style={styles.buttonText}>Ir a Guardar Cliente</Text>
@@ -43,6 +44,14 @@ export default function ListarClientes() {
               <Text style={styles.label}>
                 Cedula: <Text>{i.cedula}</Text>
               </Text>
+
+              <TouchableOpacity
+                style={styles.deleteButton}
+                onPress={() => deleteItemByIndex(index)}
+              >
+                <AntDesign name="delete" size={24} color="black" />
+              </TouchableOpacity>
+
               <Text style={styles.label}>
                 Nombre: <Text>{i.nombre}</Text>
               </Text>
@@ -55,13 +64,9 @@ export default function ListarClientes() {
               <Text style={styles.label}>
                 Sexo: <Text>{i.sexo}</Text>
               </Text>
-              <TouchableOpacity
-                style={styles.deleteButton}
-                onPress={() => deleteItemByIndex(index)}
-              >
-                <Text style={styles.buttonText}>Eliminar</Text>
-              </TouchableOpacity>
+              
             </View>
+            
           ))}
         </ScrollView>
       )}
@@ -72,8 +77,10 @@ export default function ListarClientes() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E8F5E9",
+    backgroundColor: "#E6F7E6",
     padding: 20,
+    marginTop: 20,
+    
   },
   titulo: {
     fontSize: 24,
@@ -108,7 +115,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontWeight: "bold",
-    color: "#1B55E20",
+    color: "#1B55E2",
     fontSize: 16,
   },
   valor: {
@@ -118,11 +125,11 @@ const styles = StyleSheet.create({
     fontWeight: "400",
   },
   deleteButton: {
-    backgroundColor: "#e74c3c",
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-    marginTop: 10,
+    position: 'absolute',
+    top:10,
+    right:10,
+    width:32,
+    height:32
   },
   navigateButton: {
     backgroundColor: "#3498db",

@@ -11,14 +11,16 @@ const loginStacNavigator = createStackNavigator();
 
 function MyStack() {
   return (
-    <loginStacNavigator.Navigator initialRouteName="ListarClientes">
+    <loginStacNavigator.Navigator initialRouteName="Lista de Clientes">
       <loginStacNavigator.Screen
-        name="ListarClientes"
+        name="Lista de Clientes"
         component={ListarClientes}
+        options={{ headerShown: false }}
       ></loginStacNavigator.Screen>
       <loginStacNavigator.Screen
-        name="Formulario"
+        name="Registrar Cliente"
         component={ClientForm}
+        options={{ headerShown: false }}
       ></loginStacNavigator.Screen>
     </loginStacNavigator.Navigator>
   );

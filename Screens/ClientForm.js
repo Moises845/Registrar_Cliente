@@ -4,7 +4,7 @@ import React, { use, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 
-export default function ClientForm({ route }) {
+export default function ClientForm({ route, navigation }) {
   const { clientes, setClientes } = route.params;
 
   const [cedula, setCedula] = useState("");
@@ -43,16 +43,19 @@ export default function ClientForm({ route }) {
     setApellidos("");
     setFechaNacimiento("");
     setSexo("");
+
+    navigation.goBack();
   };
 
   return (
     <View style={styles.container}>
+      <Text style={styles.encabezado}>Registrar Cliente</Text>
       <Text style={styles.label}>Cedula: </Text>
       <TextInput
         style={styles.input}
         value={cedula}
         onChangeText={setCedula}
-        placeholder="ejemplo: 355-111111-1000A"
+        placeholder="ej: 355-111111-1000A"
       />
 
       <Text style={styles.label}>Nombres: </Text>
@@ -60,7 +63,7 @@ export default function ClientForm({ route }) {
         style={styles.input}
         value={nombre}
         onChangeText={setNombre}
-        placeholder="ejemplo: Pepito"
+        placeholder="ej: Jose Armando"
       />
 
       <Text style={styles.label}>Apellidos: </Text>
@@ -68,7 +71,7 @@ export default function ClientForm({ route }) {
         style={styles.input}
         value={apellidos}
         onChangeText={setApellidos}
-        placeholder="ejemplo: Gomez"
+        placeholder="ej: Perez Jimenez"
       />
 
       <Text style={styles.label}>Fecha de nacimiento: </Text>
@@ -76,7 +79,7 @@ export default function ClientForm({ route }) {
         style={styles.input}
         value={fechaNacimiento}
         onChangeText={setFechaNacimiento}
-        placeholder="YYYY-MM-DD"
+        placeholder="DD-MM-YYYY"
       />
 
       <Text style={styles.label}>Sexo: </Text>
@@ -85,13 +88,8 @@ export default function ClientForm({ route }) {
           selectedValue={sexo}
           onValueChange={(itemValue) => setSexo(itemValue)}
         >
-          <Picker.Item label="seleccione ... " value="" />
           <Picker.Item label="Masculino" value="Masculino" />
           <Picker.Item label="Femenino" value="Femenino" />
-          <Picker.Item
-            label="Avion apache de combate"
-            value="Avion apache de combate"
-          />
         </Picker>
       </View>
       <Button title="Guardar" onPress={guardar}></Button>
@@ -102,9 +100,17 @@ export default function ClientForm({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    flexDirection: "column",
+    backgroundColor: "#E6F7E6",
     alignItems: "center",
     justifyContent: "center",
+  },
+  encabezado: {
+    fontSize: 30,
+    fontWeight: "bold",
+    marginTop: 10,
+    textAlign: "left",
+    width: 300,
   },
   label: {
     fontWeight: "bold",
